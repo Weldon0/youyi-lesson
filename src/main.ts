@@ -1,15 +1,16 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+// 引入vant的全局样式
+import 'vant/lib/index.css'
 
 import './assets/main.css'
+import pinia from '@/stores'
 
 const app = createApp(App)
 
-app.use(createPinia())
-console.log('23')
+app.use(pinia)
 
 app.use(router)
 
