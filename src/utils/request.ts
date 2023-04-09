@@ -1,4 +1,5 @@
 import axios from 'axios'
+import type { Method } from 'axios'
 import { useUserStore } from '@/stores'
 import { showToast } from 'vant'
 import router from '@/router'
@@ -32,9 +33,11 @@ instance.interceptors.response.use(
   (response) => {
     //   状态码200-300
     // 1、判断返回的数据是否可用
+    console.log(response)
     if (response.data.code !== 10000) {
-      // 数据不可用
-      showToast(response.data.message)
+      showToast({
+        message: response.data.message
+      })
       return Promise.reject(response.data)
     }
 
@@ -66,7 +69,7 @@ type Data<T> = {
 
 export const request = <T>(
   url: string,
-  method = 'get',
+  method: Method = 'get', // 指定method的类型
   submitData?: object
 ) => {
   //   第二个泛型直接指定接口的返回数据类型，不使用data包裹
@@ -77,8 +80,3 @@ export const request = <T>(
     [method.toLowerCase() === 'get' ? 'params' : 'data']: submitData
   })
 }
-
-// 指定接口数据类型
-request<{ username: string }>('https://www').then((res) => {
-  console.log(res.data.username)
-})
