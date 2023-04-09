@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-console.log(import.meta.env.BASE_URL)
 const router = createRouter({
   // 路由模式
   // 传入的这个值是路由的基准地址
